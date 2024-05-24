@@ -54,11 +54,11 @@ algs = [
   ("CODE", {}, "red", "-", "CODE")]
 
 # # load data
-with open('data_linear_new.pickle', 'rb') as f: # Uncomment to use the new data
-# with open('data_movielens.pickle', 'rb') as f:
-# with open('data_heart3.pickle', 'rb') as f:
-# with open('data_wine.pickle', 'rb') as f:
-# with open('data_linear_changing2.pickle', 'rb') as f:
+# with open('data/data_linear.pickle', 'rb') as f: # Uncomment to use the new data
+with open('data/data_movielens.pickle', 'rb') as f:
+# with open('data/data_heart3.pickle', 'rb') as f:
+# with open('data/data_wine.pickle', 'rb') as f:
+# with open('data/data_linear_changing2.pickle', 'rb') as f:
     # Pickle the 'data' dictionary using the highest protocol available.
     data = pickle.load(f)
 

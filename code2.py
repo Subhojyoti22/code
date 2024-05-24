@@ -193,13 +193,7 @@ def evaluate_one(Alg, params, env, n):
     regret_at_t = env.regret(arm)
     regret[t] += regret_at_t
     pulled_arms[t] = arm
-
-    theta_hat = alg.get_mle()
-    mu_hat = env.X.dot(theta_hat)  # estimated mean rewards of all arms
-    best_arm_est = np.argmax(mu_hat)  # estimated optimal arm
-    errors[t, :] = np.square((env.X[best_arm_est] - env.X[env.best_arm]).dot(env.theta))
-
-    # errors[t, :] = np.square(env.X.dot(alg.get_mle() - env.theta))
+    errors[t, :] = np.square(env.X.dot(alg.get_mle() - env.theta))
     # errors[t, :] = env.X.dot(alg.get_mle())
 
   metric = np.zeros(n)
@@ -502,7 +496,7 @@ def generate_bandits(num_runs, theta0, Sigma0):
   return envs
 
 
-d = 10  # number of features
+d = 5  # number of features
 K = 100  # number of arms
 n = 10000  # horizon
 num_runs = 50  # number of random runs

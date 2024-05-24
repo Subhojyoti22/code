@@ -198,11 +198,7 @@ def evaluate_one(Alg, params, env, n):
     regret_at_t = env.regret(arm)
     regret[t] += regret_at_t
     pulled_arms[t] = arm
-    
-    theta_hat = alg.get_mle()
-    mu_hat = env.X.dot(theta_hat)  # estimated mean rewards of all arms
-    best_arm_est = np.argmax(mu_hat)  # estimated optimal arm
-    errors[t, :] = np.square((env.X[best_arm_est] - env.X[env.best_arm]).dot(env.theta))
+    errors[t, :] = np.square(env.X.dot(alg.get_mle() - env.theta))
     # errors[t, :] = env.X.dot(alg.get_mle())
 
   metric = np.zeros(n)
@@ -544,14 +540,14 @@ sigma = 0.811  # reward noise
 n = 5000 # horizon
 num_runs = 50  # number of random runs
 
-##### learn model of the environment #####
+##### learn model of the environment
 Theta, X = ALS(M, W, d=d)
 
-with open('Dataset/data.pickle', 'wb') as f:
+with open('data.pickle', 'wb') as f:
     # Pickle the 'data' dictionary using the highest protocol available.
     pickle.dump([Theta, X], f)
 
-with open('Dataset/data.pickle', 'rb') as f:
+with open('data.pickle', 'rb') as f:
     # Pickle the 'data' dictionary using the highest protocol available.
     data = pickle.load(f)
 
